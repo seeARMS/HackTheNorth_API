@@ -1,13 +1,13 @@
 <?php
 
-class User extends Eloquent {
+class Event extends Eloquent {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'events';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -16,11 +16,9 @@ class User extends Eloquent {
 	 */
 	//protected $hidden = array('password', 'remember_token');
 
-
-    public function events()
+    public function users()
     {
-        return $this->belongsToMany('Event')->withPivot('complete');
+        return $this->belongsToMany('User')->withPivot('complete');
     }
-
 
 }
