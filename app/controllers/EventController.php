@@ -1,18 +1,22 @@
 <?php
 
-class EventController extends \BaseController {
+class OccasionController extends \BaseController {
 
 
-	public function postEvent() {
+	public function postOccasion() {
 		$input = Input::all();
 
-		$event = new Event();
 
-		$event->name = $input['name'];
 
-		$event->save();
 
-		return $event;
+
+		$occasion = new Occasion();
+
+		$occasion->name = $input['name'];
+
+		$occasion->save();
+
+		return $occasion;
 	}
 
 

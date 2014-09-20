@@ -17,9 +17,9 @@ class User extends Eloquent {
 	//protected $hidden = array('password', 'remember_token');
 
 
-    public function events()
+    public function occasions()
     {
-        return $this->belongsToMany('Event')->withPivot('complete');
+        return $this->belongsToMany('Occasion')->withPivot('complete');
     }
 
 

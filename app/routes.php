@@ -19,6 +19,7 @@ Route::get('/', function()
 Route::get('/user/{id}', 'UserController@getUser');
 Route::get('/user/', 'UserController@getAll');
 Route::post('/user/', 'UserController@registerUser');
+Route::post('/occasion/', 'OccasionController@postOccasion');
 
 //Route::controller('users', 'UserController');
 

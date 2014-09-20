@@ -1,6 +1,6 @@
 <?php
 
-class Occasion extends Eloquent {
+class Event_ extends Eloquent {
 
 	/**
 	 * The database table used by the model.
