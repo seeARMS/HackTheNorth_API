@@ -7,7 +7,7 @@ class Occasion extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'events';
+	protected $table = 'occasions';
 
 	/**
 	 * The attributes excluded from the model's JSON form.

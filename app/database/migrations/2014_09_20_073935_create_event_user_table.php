@@ -14,10 +14,10 @@ class CreateEventUserTable extends Migration {
 	{
 		Schema::create('event_user', function($table)
 		{
-		    $table->increments('id');
+		    $table->increments('id')->unsigned();
 		    $table->integer('event_id');	
 		    $table->integer('user_id');	
-   		    $table->boolean('complete');	
+   		    $table->boolean('complete')->default(0);	
 		});
 	}
 

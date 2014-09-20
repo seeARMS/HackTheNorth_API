@@ -21,5 +21,9 @@ Route::get('/user/', 'UserController@getAll');
 Route::post('/user/', 'UserController@registerUser');
 Route::post('/occasion/', 'OccasionController@postOccasion');
 
+
+Route::get('/test/', 'UserController@sendMessage');
+Route::get('/algorithm/', 'UserController@testAlgorithm');
+
 //Route::controller('users', 'UserController');
 
