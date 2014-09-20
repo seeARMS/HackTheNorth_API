@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use \User;
 use \Timeslot;
+use \Occasion;
 
 class Algorithm {
 
@@ -76,6 +77,15 @@ class Algorithm {
 
 
 		$occasion->pivot->complete = 1;
+		$occasion->pivot->save();
+
+
+		$current_occasion = Occasion::find($occasion_id)->users()->get()->pivot;
+
+
+
+		dd($current_occasion);
+
 
 		dd($decoded->time_slots);
 		

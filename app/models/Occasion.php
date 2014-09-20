@@ -14,7 +14,7 @@ class Occasion extends Eloquent {
 	 *
 	 * @var array
 	 */
-	//protected $hidden = array('password', 'remember_token');
+	protected $hidden = array('pivot', 'created_at', 'updated_at');
 
     public function users()
     {
@@ -25,6 +25,7 @@ class Occasion extends Eloquent {
     {
 		return $this->hasMany('Timeslot');
     }
+
 
 
 }

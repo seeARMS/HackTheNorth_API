@@ -25,7 +25,7 @@ Route::post('/occasion/', 'OccasionController@postOccasion');
 
 
 Route::get('/test/', 'UserController@sendMessage');
-Route::get('/algorithm/', 'UserController@testAlgorith');
+Route::get('/algorithm/', 'UserController@testAlgorithm');
 
 //Route::controller('users', 'UserController');
 
