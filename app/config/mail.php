@@ -6,7 +6,7 @@ return array(
   'port' => 587,
   'from' => array('address' => 'test@example.com', 'name' => 'John Smith'),
   'encryption' => 'tls',
-  'username' => 'colin',
+  'username' => 'colinarms',
   'password' => '0gkC69CC9Mptz6ijr93T',
 );
 
