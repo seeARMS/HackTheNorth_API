@@ -21,4 +21,10 @@ class Occasion extends Eloquent {
         return $this->belongsToMany('User')->withPivot('complete');
     }
 
+    public function timeslot()
+    {
+		return $this->hasMany('Timeslot');
+    }
+
+
 }

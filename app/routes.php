@@ -19,11 +19,13 @@ Route::get('/', function()
 Route::get('/user/{id}', 'UserController@getUser');
 Route::get('/user/', 'UserController@getAll');
 Route::post('/user/', 'UserController@registerUser');
+Route::get('/user/occasion/{id}', 'UserController@getUsersOccasions');
+
 Route::post('/occasion/', 'OccasionController@postOccasion');
 
 
 Route::get('/test/', 'UserController@sendMessage');
-Route::get('/algorithm/', 'UserController@testAlgorithm');
+Route::get('/algorithm/', 'UserController@testAlgorith');
 
 //Route::controller('users', 'UserController');
 

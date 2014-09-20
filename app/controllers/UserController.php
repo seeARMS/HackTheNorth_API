@@ -11,6 +11,10 @@ class UserController extends \BaseController {
 		return User::find($id);
 	}
 
+	public function getUsersOccasions($id) {
+		return User::find($id)->occasions;
+	}
+
 	public function getAll() {
 		return User::all();
 	}
@@ -73,7 +77,7 @@ class UserController extends \BaseController {
 		$alg = new Algorithm();
 
 
-		return $alg->calculateSchedule();
+		return $alg->storeSchedule();
 
 
 	}

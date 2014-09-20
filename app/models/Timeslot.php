@@ -1,13 +1,13 @@
 <?php
 
-class User extends Eloquent {
+class Timeslot extends Eloquent {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
+	protected $table = 'timeslots';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -17,14 +17,14 @@ class User extends Eloquent {
 	//protected $hidden = array('password', 'remember_token');
 
 
-    public function occasions()
+    public function occasion()
     {
-        return $this->belongsToMany('Occasion')->withPivot('complete');
+        return $this->belongsTo('Occasion');
     }
 
-    public function timeslot()
+    public function user()
     {
-		return $this->hasMany('Timeslot');
+        return $this->belongsTo('User');
     }
 
 

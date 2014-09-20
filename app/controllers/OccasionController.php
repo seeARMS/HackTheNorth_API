@@ -19,6 +19,4 @@ class OccasionController extends \BaseController {
 	}
 
 
-
-
 }
