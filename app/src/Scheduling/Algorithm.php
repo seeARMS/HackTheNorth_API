@@ -143,10 +143,15 @@ class Algorithm {
 		rsort($score);
 		$top3 = array_reverse(array_slice($score, 0, 3));
 
-		Mail::send('emails.invite', $data, function($message)
+
+		Occasion::find($occasion_id)->users();
+
+		Mail::send('emails.invite', $data, function($message) use ()
 		{
 		    $message->to('jane@example.com', 'Jane Doe')->subject('This is a demo!');
 		});
+
+
 
 
 

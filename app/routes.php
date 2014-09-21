@@ -20,7 +20,7 @@ Route::get('/user/{email}', 'UserController@getUser');
 Route::get('/user/', 'UserController@getUser');
 Route::post('/user/', 'UserController@registerUser');
 
-Route::post('/user/list', 'UserController@registerMultipleUsers');
+Route::any('/user-register', 'UserController@registerMultipleUsers');
 
 Route::get('/user/occasion/{id}', 'UserController@getUsersOccasions');
 

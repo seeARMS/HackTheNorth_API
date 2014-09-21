@@ -36,8 +36,29 @@ class UserController extends \BaseController {
 
 	// its gonne be here
 	public function registerMultipleUsers() {
-		$input = Input::all();
+		//$input = Input::all();
 
+
+
+		$input = json_decode(Input::get('data'));
+		//$input = json_decode($json);
+
+		$event_num = $input->event;
+		$names = $input->names;
+
+		//dd($event_num);
+
+		for ($i = 0; $i < count($names); $i++) {
+			$user = User::where('name', '=', $names[$i])->first();
+
+			$user->occasions()->attach($event_num);
+			$user->save();
+		}
+
+
+
+	//	for ($i = 0)
+/*
 
 
 		$user = new User();
@@ -49,6 +70,7 @@ class UserController extends \BaseController {
 		$user->save();
 
 		return $user;
+		*/
 	}
 
 
@@ -63,6 +85,31 @@ class UserController extends \BaseController {
 		//     $message->to('colinarms@gmail.com', 'Jane Doe')->subject('This is a demo!');
 		// });
 
+		$users = Occasion::find(1)->users()->get();
+
+		$data = array('temp');
+
+		$users = $users->each(function($user) use ($data) {
+			Mail::send('emails.invite', $data, function($message) use ($user)
+			{
+			    $message->to($user->email, 'Jane Doe')->subject('EVent has been completed!');
+			});
+		});
+
+		/*
+		for ($i = 0; i < $users->count(); $i++) {
+			
+			Mail::send('emails.invite', $data, function($message) use ($users->get())
+			{
+			    $message->to('jane@example.com', 'Jane Doe')->subject('EVent has been completed!');
+			});
+
+		}
+		*/
+
+
+
+		/*
 
 		$app_id = 'jVmr9Q4ItzKs2abze4T2mRvECJ8AxMwCKT5G8anC';
 		$rest_key = 'hNv7GwawFKdvpyb6B6u8sLqlSQMW3YWWRQeKVll7';
@@ -81,7 +128,7 @@ class UserController extends \BaseController {
 		  "where" => $query,
 		  "data" => $data
 		));
-
+	*/
 
 
 	}
