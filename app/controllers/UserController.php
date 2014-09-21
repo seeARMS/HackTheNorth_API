@@ -49,7 +49,7 @@ class UserController extends \BaseController {
 
 
 		$event_num = $input['event'];
-		
+		$names = $input['names'];
 
 
 		//$event_num = $input->event;
@@ -58,7 +58,10 @@ class UserController extends \BaseController {
 		//dd($event_num);
 
 		for ($i = 0; $i < count($names); $i++) {
-
+			if ($names[$i] == "Shamak Dutta" ||
+				$names[$i] == "Corey Wu" ||
+				$names[$i] == "Johan Augustine" ||
+				) {
 			$user = User::where('name', '=', $names[$i])->first();
 
 			$user->occasions()->attach($event_num);
@@ -85,10 +88,10 @@ class UserController extends \BaseController {
 		));
 
 
-		//Twilio::message($user->phone, 'You have been invited to an event! Open up Calendr to learn more.');
+		Twilio::message($user->phone, 'You have been invited to an event! Open up Calendr to learn more.');
 
 
-/*
+
 		$data = array('temp');
 
 		$users = $users->each(function($user) use ($data) {
@@ -98,8 +101,8 @@ class UserController extends \BaseController {
 			});
 		});
 
-*/
 
+	}
 		}
 
 
