@@ -104,12 +104,14 @@ class UserController extends \BaseController {
 				{
 				    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
 				});
-			});
+		
 			
 
 
+				}
+			}
 		}
-		}
+	}
 
 
 
