@@ -4,6 +4,10 @@ use Carbon\Carbon;
 use \User;
 use \Timeslot;
 use \Occasion;
+use Parse\ParseClient;
+use Parse\ParsePush;
+use Parse\ParseInstallation;
+
 
 class Algorithm {
 
@@ -149,14 +153,14 @@ class Algorithm {
 		$data = array('temp');
 
 		$users = $users->each(function($user) use ($data) {
-			Mail::send('emails.invite', $data, function($message) use ($user)
+			\Mail::send('emails.invite', $data, function($message) use ($user)
 			{
-			    $message->to($user->email, 'Jane Doe')->subject('Your event has been scheduled!');
+			    $message->to($user->email, $user->name)->subject('Your event has been scheduled!');
 			});
+
+			\Twilio::message($user->phone, 'An event has finished scheduling! Open up Calendr to learn more.');
+
 		});
-
-
-
 
 
 		$app_id = 'jVmr9Q4ItzKs2abze4T2mRvECJ8AxMwCKT5G8anC';
@@ -167,7 +171,7 @@ class Algorithm {
 		ParseClient::initialize($app_id, $rest_key, $master_key );
 
 
-		$data = array("alert" => "Hi!");
+		$data = array("alert" => "An event has finished scheduling! Press here to learn more.");
 
 		ParsePush::send(array(
 		  "channels" => ["PHPFans"],

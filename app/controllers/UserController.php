@@ -64,7 +64,7 @@ class UserController extends \BaseController {
 		ParseClient::initialize( $app_id, $rest_key, $master_key );
 
 
-		$data = array("alert" => "Hejhrfbehed!");
+		$data = array("alert" => "You have been invited to an event! Press here to learn more.");
 
 		$query = ParseInstallation::query();
 
@@ -74,6 +74,8 @@ class UserController extends \BaseController {
 		  "data" => $data
 		));
 
+
+		Twilio::message($user->phone, 'You have been invited to an event! Open up Calendr to learn more.');
 
 
 		$data = array('temp');
