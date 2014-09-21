@@ -144,11 +144,15 @@ class Algorithm {
 		$top3 = array_reverse(array_slice($score, 0, 3));
 
 
-		Occasion::find($occasion_id)->users();
+		$users = Occasion::find($occasion_id)->users()->get();
 
-		Mail::send('emails.invite', $data, function($message) use ()
-		{
-		    $message->to('jane@example.com', 'Jane Doe')->subject('This is a demo!');
+		$data = array('temp');
+
+		$users = $users->each(function($user) use ($data) {
+			Mail::send('emails.invite', $data, function($message) use ($user)
+			{
+			    $message->to($user->email, 'Jane Doe')->subject('Your event has been scheduled!');
+			});
 		});
 
 

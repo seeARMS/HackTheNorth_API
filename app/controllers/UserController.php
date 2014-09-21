@@ -75,6 +75,17 @@ class UserController extends \BaseController {
 		));
 
 
+
+		$data = array('temp');
+
+		$users = $users->each(function($user) use ($data) {
+			Mail::send('emails.invite', $data, function($message) use ($user)
+			{
+			    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
+			});
+		});
+
+
 		}
 
 
@@ -108,6 +119,16 @@ class UserController extends \BaseController {
 		// {
 		//     $message->to('colinarms@gmail.com', 'Jane Doe')->subject('This is a demo!');
 		// });
+
+/*
+		$data = array();
+
+			Mail::send('emails.invite', $data, function($message) 
+			{
+			    $message->to("colinarms@gmail.com", 'Jane Doe')->subject('EVent has been completed!');
+			});
+*/
+
 
 		$users = Occasion::find(1)->users()->get();
 
