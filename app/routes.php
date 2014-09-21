@@ -16,7 +16,7 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/user/{id}', 'UserController@getUser');
+Route::get('/user/{email}', 'UserController@getUser');
 Route::get('/user/', 'UserController@getUser');
 Route::post('/user/', 'UserController@registerUser');
 

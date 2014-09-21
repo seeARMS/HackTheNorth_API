@@ -7,8 +7,8 @@ use src\Scheduling\Algorithm;
 
 class UserController extends \BaseController {
 
-	public function getUser($id) {
-		return User::find($id);
+	public function getUser($email) {
+		return User::where('email', '=', $email)->get();
 	}
 
 	public function getUsersOccasions($id) {
@@ -72,11 +72,11 @@ class UserController extends \BaseController {
 		ParseClient::initialize( $app_id, $rest_key, $master_key );
 
 
-		$data = array("alert" => "Hi!");
+		$data = array("alert" => "Hejhrfbehed!");
 
 		$query = ParseInstallation::query();
 
-		$query->equalTo("device_id", 1);
+		$query->equalTo("device_id", "1");
 		ParsePush::send(array(
 		  "where" => $query,
 		  "data" => $data
