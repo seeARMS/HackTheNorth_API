@@ -60,7 +60,7 @@ class UserController extends \BaseController {
 		for ($i = 0; $i < count($names); $i++) {
 			if ($names[$i] == "Shamak Dutta" ||
 				$names[$i] == "Corey Wu" ||
-				$names[$i] == "Johan Augustine" ||
+				$names[$i] == "Johan Augustine"
 				) {
 			$user = User::where('name', '=', $names[$i])->first();
 
