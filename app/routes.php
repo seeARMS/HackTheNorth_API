@@ -19,6 +19,9 @@ Route::get('/', function()
 Route::get('/user/{id}', 'UserController@getUser');
 Route::get('/user/', 'UserController@getAll');
 Route::post('/user/', 'UserController@registerUser');
+
+Route::post('/user/list', 'UserController@registerMultipleUsers');
+
 Route::get('/user/occasion/{id}', 'UserController@getUsersOccasions');
 
 Route::post('/occasion/', 'OccasionController@postOccasion');

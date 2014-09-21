@@ -34,6 +34,22 @@ class UserController extends \BaseController {
 	}
 
 
+	public function registerMultipleUsers() {
+		$input = Input::all();
+
+		$user = new User();
+
+		$user->name = $input['name'];
+		$user->email = $input['email'];
+		$user->phone = $input['phone'];
+
+		$user->save();
+
+		return $user;
+	}
+
+
+
 	public function sendMessage() {
 		//Twilio::message('+15195805110', 'This is a test!');
 

@@ -7,19 +7,6 @@ use \Occasion;
 
 class Algorithm {
 
-	public function Algorithm() {
-
-
-
-	}
-
-	public function calculateSchedule() {
-
-
-
-	}
-
-
 	public function storeSchedule() {
 		$input['json'] = '{
 						    "user": "3",
@@ -66,7 +53,8 @@ class Algorithm {
 					  'start' 	=> $ts_start->toDateTimeString(),
 					  'end'   	=> $ts_end->toDateTimeString(),
 					  'weighting'=> $time_slots[$i]->weighting,
-					  'user_id' => $user_id
+					  'user_id' => $user_id,
+					  'occasion_id' => $occasion_id
 					  );
 
 		}
@@ -79,23 +67,53 @@ class Algorithm {
 		$occasion->pivot->complete = 1;
 		$occasion->pivot->save();
 
-
-		$current_occasion = Occasion::find($occasion_id)->users()->get()->pivot;
-
-
-
-		dd($current_occasion);
+		$num_incomplete_occasions = Occasion::find($occasion_id)->users()
+																->wherePivot('complete', 0)
+																->count();
 
 
-		dd($decoded->time_slots);
+
+		if ($num_incomplete_occasions != 0)
+			return $occasion;
+
+
+		// The events are done - push 
+		$occasion = Occasion::find($occasion_id);
+
+		$host_start = new Carbon($occasion->start);
+		$host_end   = new Carbon($occasion->end);
+
+		$diff = $host_start->diffInMinutes($host_end);
+
+		$num_users = $occasion->users->count();
 		
 
-		var_dump($user);
+	
+		$score = array();
+
+		// implement eager loading
+		for ($i = 0; $i < $diff; $i += 15) {
+			for ($j = 0; $j < $num_users; $j++) {
+				$timeslot = Timeslot::where('user_id', '=', $j)
+									->where('start', '<', $occasion->start + $i)
+									->where('end', '>', $occasion->end - $i)->first();
+				
+				if ($timeslot != null)
+					$score[] += $timeslot->weighting;
+
+			
+			}
+
+		}
+
+		rsort($score);
+		$top3 = array_reverse(array_slice($score, 0, 3));
 
 
+		dd($top3);
 
 
-		//return $decoded[0][0];
+		
 	}
 
 
