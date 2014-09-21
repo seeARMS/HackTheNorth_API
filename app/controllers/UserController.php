@@ -58,10 +58,6 @@ class UserController extends \BaseController {
 		//dd($event_num);
 
 		for ($i = 0; $i < count($names); $i++) {
-			if ($names[$i] == "Shamak Dutta" ||
-				$names[$i] == "Corey Wu" ||
-				$names[$i] == "Johan Augustine"
-				) {
 
 				\Log::error($names[$i]);
 
@@ -100,16 +96,17 @@ class UserController extends \BaseController {
 
 				$data = array('temp');
 
+				/*
 				Mail::send('emails.invite', $data, function($message) use ($user)
 				{
 					\Log::info($user->email);
 				    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
 				});
-		
+		*/
 			
 
 
-				}
+				
 			}
 		}
 	}
