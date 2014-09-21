@@ -62,7 +62,13 @@ class UserController extends \BaseController {
 				$names[$i] == "Corey Wu" ||
 				$names[$i] == "Johan Augustine"
 				) {
+
+				\Log::error($names[$i]);
+
 			$user = User::where('name', '=', $names[$i])->first();
+		\Log::error($user);
+
+
 
 			$user->occasions()->attach($event_num);
 			$user->save();
