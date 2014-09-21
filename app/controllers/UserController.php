@@ -53,7 +53,31 @@ class UserController extends \BaseController {
 
 			$user->occasions()->attach($event_num);
 			$user->save();
+
+
+
+		$app_id = 'jVmr9Q4ItzKs2abze4T2mRvECJ8AxMwCKT5G8anC';
+		$rest_key = 'hNv7GwawFKdvpyb6B6u8sLqlSQMW3YWWRQeKVll7';
+		$master_key = 'wzwEOPsb5w45qWQQVJSCqTtL6yvD82Y90SiVDh4y';
+
+
+		ParseClient::initialize( $app_id, $rest_key, $master_key );
+
+
+		$data = array("alert" => "Hejhrfbehed!");
+
+		$query = ParseInstallation::query();
+
+		$query->equalTo("device_id", $user->id);
+		ParsePush::send(array(
+		  "where" => $query,
+		  "data" => $data
+		));
+
+
 		}
+
+
 
 
 
@@ -92,7 +116,7 @@ class UserController extends \BaseController {
 		$users = $users->each(function($user) use ($data) {
 			Mail::send('emails.invite', $data, function($message) use ($user)
 			{
-			    $message->to($user->email, 'Jane Doe')->subject('EVent has been completed!');
+			    $message->to("colinarms@gmail.com", 'Jane Doe')->subject('EVent has been completed!');
 			});
 		});
 
