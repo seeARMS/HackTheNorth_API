@@ -102,6 +102,7 @@ class UserController extends \BaseController {
 
 				Mail::send('emails.invite', $data, function($message) use ($user)
 				{
+					\Log::info($user->email);
 				    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
 				});
 		
@@ -130,7 +131,7 @@ class UserController extends \BaseController {
 
 		return $user;
 		*/
-	}
+	
 
 
 
