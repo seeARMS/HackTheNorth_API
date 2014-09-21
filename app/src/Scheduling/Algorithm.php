@@ -88,34 +88,60 @@ class Algorithm {
 		$num_users = $occasion->users->count();
 		
 
-	
 		$score = array();
+		$score = array_fill(0, 10000, 0);
+		//$score[0] = 'test';
+		//$score = 0;
+
+		$k = 0;
+
+		$previous = new Carbon($occasion->start);
 
 		// implement eager loading
 		for ($i = 0; $i < $diff; $i += 15) {
 			for ($j = 0; $j < $num_users; $j++) {
-				$timeslot = Timeslot::where('user_id', '=', $j)
-									->where('start', '<', $occasion->start + $i)
-									->where('end', '>', $occasion->end - $i)->first();
-				
-				if ($timeslot != null)
-					$score[] += $timeslot->weighting;
 
-			
-			}
+				$start = new Carbon($occasion->start);
+
+				$start->addMinutes($i);
+
+				$timeslot = Timeslot::where('user_id', '=', $j)
+									->where('start', '<=', $previous->toDateTimeString())
+									->where('end', '>=', $start->toDateTimeString())->first();
+
+
+
+
+				if ($timeslot != null) {
+					//dd($timeslot);
+
+					//$score = array_add($score, $i, $timeslot->weighting);
+
+					$score[$i] += $timeslot->weighting; 
+
+					//$score[$i] += $timeslot->weighting;
+					//$score[] = array($timeslot->weighting);
+					//$k++;
+					//var_dump($score);
+
+
+
+				}
+
 
 		}
-
-		rsort($score);
-		$top3 = array_reverse(array_slice($score, 0, 3));
-
-
-		dd($top3);
-
+			$previous = $start;
 
 		
 	}
 
+	$score = array_filter($score);
+	dd($score);
+		rsort($score);
+		$top3 = array_reverse(array_slice($score, 0, 3));
+
+		dd($score);
 
 
+}
 }
