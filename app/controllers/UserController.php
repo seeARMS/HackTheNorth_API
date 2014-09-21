@@ -69,46 +69,47 @@ class UserController extends \BaseController {
 		\Log::error($user);
 
 
-
-			$user->occasions()->attach($event_num);
-			$user->save();
-
-
-
-		$app_id = 'jVmr9Q4ItzKs2abze4T2mRvECJ8AxMwCKT5G8anC';
-		$rest_key = 'hNv7GwawFKdvpyb6B6u8sLqlSQMW3YWWRQeKVll7';
-		$master_key = 'wzwEOPsb5w45qWQQVJSCqTtL6yvD82Y90SiVDh4y';
-
-
-		ParseClient::initialize( $app_id, $rest_key, $master_key );
-
-
-		$data = array("alert" => "You have been invited to an event! Press here to learn more.");
-
-		$query = ParseInstallation::query();
-
-		$query->equalTo("device_id", $user->id);
-		ParsePush::send(array(
-		  "where" => $query,
-		  "data" => $data
-		));
-
-
-		Twilio::message($user->phone, 'You have been invited to an event! Open up Calendr to learn more.');
+			if (isset($user)) {
+				$user->occasions()->attach($event_num);
+				$user->save();
 
 
 
-		$data = array('temp');
-
-		$users = $users->each(function($user) use ($data) {
-			Mail::send('emails.invite', $data, function($message) use ($user)
-			{
-			    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
-			});
-		});
+				$app_id = 'jVmr9Q4ItzKs2abze4T2mRvECJ8AxMwCKT5G8anC';
+				$rest_key = 'hNv7GwawFKdvpyb6B6u8sLqlSQMW3YWWRQeKVll7';
+				$master_key = 'wzwEOPsb5w45qWQQVJSCqTtL6yvD82Y90SiVDh4y';
 
 
-	}
+				ParseClient::initialize( $app_id, $rest_key, $master_key );
+
+
+				$data = array("alert" => "You have been invited to an event! Press here to learn more.");
+
+				$query = ParseInstallation::query();
+
+				$query->equalTo("device_id", $user->id);
+				ParsePush::send(array(
+				  "where" => $query,
+				  "data" => $data
+				));
+
+
+				Twilio::message($user->phone, 'You have been invited to an event! Open up Calendr to learn more.');
+
+
+
+				$data = array('temp');
+
+				$users = $users->each(function($user) use ($data) {
+					Mail::send('emails.invite', $data, function($message) use ($user)
+					{
+					    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
+					});
+				});
+			}
+
+
+		}
 		}
 
 
