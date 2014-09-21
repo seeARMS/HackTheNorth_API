@@ -36,13 +36,13 @@ class UserController extends \BaseController {
 
 	// its gonne be here
 	public function registerMultipleUsers() {
-		//$input = Input::all();
+		$input = Input::all();
 
-		dd(Input::all());
+		//dd(Input::all());
 
 
 		$input = json_decode(Input::get('data'));
-		//$input = json_decode($json);
+		$input = json_decode($json);
 
 		\Log::error($input);
 
