@@ -34,8 +34,11 @@ class UserController extends \BaseController {
 	}
 
 
+	// its gonne be here
 	public function registerMultipleUsers() {
 		$input = Input::all();
+
+
 
 		$user = new User();
 
@@ -71,13 +74,9 @@ class UserController extends \BaseController {
 
 		$data = array("alert" => "Hi!");
 
-		ParsePush::send(array(
-		  "channels" => ["PHPFans"],
-		  "data" => $data
-		));
-
 		$query = ParseInstallation::query();
-		$query->equalTo("design", "rad");
+
+		$query->equalTo("device_id", 1);
 		ParsePush::send(array(
 		  "where" => $query,
 		  "data" => $data

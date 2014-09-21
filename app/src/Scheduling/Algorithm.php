@@ -136,11 +136,44 @@ class Algorithm {
 	}
 
 	$score = array_filter($score);
-	dd($score);
+	
+
+
+	//dd($score);
 		rsort($score);
 		$top3 = array_reverse(array_slice($score, 0, 3));
 
-		dd($score);
+		Mail::send('emails.invite', $data, function($message)
+		{
+		    $message->to('jane@example.com', 'Jane Doe')->subject('This is a demo!');
+		});
+
+
+
+		$app_id = 'jVmr9Q4ItzKs2abze4T2mRvECJ8AxMwCKT5G8anC';
+		$rest_key = 'hNv7GwawFKdvpyb6B6u8sLqlSQMW3YWWRQeKVll7';
+		$master_key = 'wzwEOPsb5w45qWQQVJSCqTtL6yvD82Y90SiVDh4y';
+
+
+		ParseClient::initialize($app_id, $rest_key, $master_key );
+
+
+		$data = array("alert" => "Hi!");
+
+		ParsePush::send(array(
+		  "channels" => ["PHPFans"],
+		  "data" => $data
+		));
+
+		$query = ParseInstallation::query();
+		$query->equalTo("design", "rad");
+		ParsePush::send(array(
+		  "where" => $query,
+		  "data" => $data
+		));
+
+
+	//	dd($score);
 
 
 }

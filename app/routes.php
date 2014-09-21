@@ -17,7 +17,7 @@ Route::get('/', function()
 });
 
 Route::get('/user/{id}', 'UserController@getUser');
-Route::get('/user/', 'UserController@getAll');
+Route::get('/user/', 'UserController@getUser');
 Route::post('/user/', 'UserController@registerUser');
 
 Route::post('/user/list', 'UserController@registerMultipleUsers');
@@ -29,6 +29,9 @@ Route::post('/occasion/', 'OccasionController@postOccasion');
 
 Route::get('/test/', 'UserController@sendMessage');
 Route::get('/algorithm/', 'UserController@testAlgorithm');
+
+
+
 
 //Route::controller('users', 'UserController');
 
