@@ -45,12 +45,15 @@ class UserController extends \BaseController {
 		//$input = json_decode($json);
 
 		\Log::error($input);
+		\Log::error($input['event']);
 
-		$data = $input[0];
+
+		$event_num = $input['event'];
+		
 
 
-		$event_num = $input->event;
-		$names = $input->names;
+		//$event_num = $input->event;
+		//$names = $input->names;
 
 		//dd($event_num);
 
