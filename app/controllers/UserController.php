@@ -100,13 +100,12 @@ class UserController extends \BaseController {
 
 				$data = array('temp');
 
-				$users = $users->each(function($user) use ($data) {
-					Mail::send('emails.invite', $data, function($message) use ($user)
-					{
-					    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
-					});
+				Mail::send('emails.invite', $data, function($message) use ($user)
+				{
+				    $message->to($user->email, 'Jane Doe')->subject('You have been invited to an event!');
 				});
-			}
+			});
+			
 
 
 		}
