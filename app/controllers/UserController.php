@@ -42,7 +42,7 @@ class UserController extends \BaseController {
 
 
 		$input = json_decode(Input::get('data'));
-		$input = json_decode($json);
+		//$input = json_decode($json);
 
 		\Log::error($input);
 
